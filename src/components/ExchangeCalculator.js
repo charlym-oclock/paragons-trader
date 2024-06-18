@@ -1,41 +1,128 @@
-import React, { useState } from 'react';
-import Exchange, { emptyParagon } from './Exchange';
-import { handleId } from '../utils/functions';
-import '../App.css';
+import React, { useState } from "react";
+import Exchange, { emptyParagon } from "./Exchange";
+import { handleId } from "../utils/functions";
+import "../App.css";
 
+const emptyExchange = {
+  tradedParagons: [emptyParagon],
+  desiredParagon: emptyParagon,
+};
 
 const getId = handleId();
 
-const ExchangeCalculator = () => {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [exchangeIds, setExchangeIds] = useState([0]);
+const getTypesTotal = (exchanges) =>
+  exchanges.reduce(
+    (acc, exchange) => {
+      const desiredParagon = exchange.desiredParagon;
 
+      if (!acc.desired[desiredParagon.type]) {
+        acc.desired[desiredParagon.type] = 0;
+      }
+
+      acc.desired[desiredParagon.type] += Number(desiredParagon.quantity);
+
+      for (const paragon of exchange.tradedParagons) {
+        if (!acc.traded[paragon.type]) {
+          acc.traded[paragon.type] = 0;
+        }
+
+        acc.traded[paragon.type] += Number(paragon.quantity);
+      }
+
+      return acc;
+    },
+    { traded: {}, desired: {} }
+  );
+
+const ExchangeCalculator = () => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [exchangesById, setExchangesById] = useState({
+    0: { ...emptyExchange },
+  });
 
   const handleAddExchange = () => {
-    setExchangeIds([...exchangeIds, getId()])
-  }
+    const newId = getId();
 
-  const handleRemoveExchange = targetId => {
-    setExchangeIds(exchangeIds.filter(id => id  !== targetId))
-  }
+    const newExchangesById = {
+      ...exchangesById,
+      [newId]: { ...emptyExchange },
+    };
+
+    setExchangesById(newExchangesById);
+  };
+
+  const handleRemoveExchange = (targetId) => {
+    const newExchangesById = {
+      ...exchangesById,
+    };
+
+    delete newExchangesById[targetId];
+
+    setExchangesById(newExchangesById);
+  };
+
+  const handleExchangeChange = (exchangeId) => (exchange) => {
+    setExchangesById({
+      ...exchangesById,
+      [exchangeId]: exchange,
+    });
+  };
+
+  const typesTotals = getTypesTotal(Object.values(exchangesById));
 
   return (
     <div className="container">
-      <h2>Exchange Paragons</h2>
+      <h1>Paragons Calculatosaurus</h1>
 
-      {exchangeIds.map( id => (
+      {Object.keys(exchangesById).map((id) => (
         <React.Fragment key={id}>
-          <Exchange key={id} />
-          <button className='bigbluebutton' onClick={() => handleRemoveExchange(id)}>Remove Exchange</button>
+          <Exchange key={id} onChange={handleExchangeChange(id)} />
+          <button
+            className="bigbluebutton"
+            onClick={() => handleRemoveExchange(id)}
+          >
+            Supprimer l'échange
+          </button>
         </React.Fragment>
       ))}
 
-      <button className='bigbluebutton'  onClick={handleAddExchange}>Add Exchange Group</button>
-      {errorMessage && (
-        <div className="error-message">
-          {errorMessage}
+      <button className="bigbluebutton" onClick={handleAddExchange}>
+        Ajouter un échange
+      </button>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
+
+      <div className="results-container">
+        <div className="total-sent">
+          <h3>Paragons à envoyés</h3>
+          <ul>
+            {Object.entries(typesTotals.traded).map(([type, quantity]) => {
+              if (!type) {
+                return;
+              }
+              return (
+                <li key={type}>
+                  {type}: {quantity}
+                </li>
+              );
+            })}
+          </ul>
         </div>
-      )}
+        <div className="total-received">
+          <h3>Paragons à recevoir</h3>
+          <ul>
+            {Object.entries(typesTotals.desired).map(([type, quantity]) => {
+              if (!type) {
+                return;
+              }
+              return (
+                <li key={type}>
+                  {type}: {quantity}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

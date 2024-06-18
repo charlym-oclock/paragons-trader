@@ -1,31 +1,34 @@
-import React from 'react';
-import Select from 'react-select';
+import React from "react";
+import Select from "react-select";
 
-const DesiredParagonInput = ({ desiredParagon, handleDesiredParagonChange, options }) => {
+const DesiredParagonInput = ({
+  desiredParagon,
+  handleDesiredParagonChange,
+  options,
+}) => {
   return (
     <div className="select-container">
       <Select
-          styles={{
-            option: (baseStyles, state) => {
-
-              return {
-                ...baseStyles,
-                backgroundColor: state.isFocused ? 'grey' : 'darkgrey',
-              }
-            }, 
-            control: (baseStyles, state) => {
-
-              console.log('ayo', baseStyles)
-              return ({
-                ...baseStyles,
-                backgroundColor: state.isFocused ? 'grey' : 'darkgrey',
-              })
-            },
-          }}
-        value={options.find(option => option.value === desiredParagon.type)}
-        onChange={(selectedOption) => handleDesiredParagonChange('type', selectedOption.value)}
+        styles={{
+          option: (baseStyles, state) => {
+            return {
+              ...baseStyles,
+              backgroundColor: state.isFocused ? "grey" : "darkgrey",
+            };
+          },
+          control: (baseStyles, state) => {
+            return {
+              ...baseStyles,
+              backgroundColor: state.isFocused ? "grey" : "darkgrey",
+            };
+          },
+        }}
+        value={options.find((option) => option.value === desiredParagon.type)}
+        onChange={(selectedOption) =>
+          handleDesiredParagonChange("type", selectedOption.value)
+        }
         options={options}
-        placeholder="Select Desired Paragon"
+        placeholder="Sélectionnez un paragon souhaité"
       />
     </div>
   );

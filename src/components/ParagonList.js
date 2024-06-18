@@ -1,28 +1,40 @@
-import React from 'react';
-import Select from 'react-select';
+import React from "react";
+import Select from "react-select";
 
-const ParagonList = ({ paragons, handleParagonChange, handleAddParagon, handleRemoveParagon, options }) => {
+const ParagonList = ({
+  paragons,
+  handleParagonChange,
+  handleAddParagon,
+  handleRemoveParagon,
+  options,
+}) => {
   return (
     <div>
       {paragons.map((paragon, index) => (
         <div key={index} className="paragon-item">
           <Select
-            value={options.find(option => option.value === paragon.type)}
-            onChange={(selectedOption) => handleParagonChange(index, 'type', selectedOption.value)}
+            value={options.find((option) => option.value === paragon.type)}
+            onChange={(selectedOption) =>
+              handleParagonChange(index, "type", selectedOption.value)
+            }
             options={options}
             placeholder="Select Paragon"
           />
           <input
             type="number"
             value={paragon.quantity}
-            onChange={(e) => handleParagonChange(index, 'quantity', e.target.value)}
+            onChange={(e) =>
+              handleParagonChange(index, "quantity", e.target.value)
+            }
             placeholder="Quantity"
             min="0"
           />
           <button onClick={() => handleRemoveParagon(index)}>Remove</button>
         </div>
       ))}
-      <button className='bigbluebutton' onClick={handleAddParagon}>Add Paragon</button>
+      <button className="bigbluebutton" onClick={handleAddParagon}>
+        Add Paragon
+      </button>
     </div>
   );
 };

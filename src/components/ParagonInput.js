@@ -1,7 +1,13 @@
-import React from 'react';
-import Select from 'react-select';
+import React from "react";
+import Select from "react-select";
 
-const ParagonInput = ({ paragons, handleParagonChange, handleAddParagon, handleRemoveParagon, options }) => {
+const ParagonInput = ({
+  paragons,
+  handleParagonChange,
+  handleAddParagon,
+  handleRemoveParagon,
+  options,
+}) => {
   return (
     <div>
       {paragons.map((paragon, index) => (
@@ -10,35 +16,40 @@ const ParagonInput = ({ paragons, handleParagonChange, handleAddParagon, handleR
             <Select
               styles={{
                 option: (baseStyles, state) => {
-
                   return {
                     ...baseStyles,
-                    backgroundColor: state.isFocused ? 'grey' : 'darkgrey',
-                  }
-                }, 
+                    backgroundColor: state.isFocused ? "grey" : "darkgrey",
+                  };
+                },
                 control: (baseStyles, state) => ({
                   ...baseStyles,
-                  backgroundColor: state.isFocused ? 'grey' : 'darkgrey',
+                  backgroundColor: state.isFocused ? "grey" : "darkgrey",
                 }),
               }}
-              value={options.find(option => option.value === paragon.type)}
-              onChange={(selectedOption) => handleParagonChange(index, 'type', selectedOption.value)}
+              value={options.find((option) => option.value === paragon.type)}
+              onChange={(selectedOption) =>
+                handleParagonChange(index, "type", selectedOption.value)
+              }
               options={options}
-              placeholder="Select Paragon"
+              placeholder="Sélectionner un Paragon à échanger"
             />
           </div>
           <input
-            className='quantity-input'
+            className="quantity-input"
             type="number"
             value={paragon.quantity}
-            onChange={(e) => handleParagonChange(index, 'quantity', e.target.value)}
+            onChange={(e) =>
+              handleParagonChange(index, "quantity", e.target.value)
+            }
             placeholder="Quantity"
             min="0"
           />
           <button onClick={() => handleRemoveParagon(index)}>Remove</button>
         </div>
       ))}
-      <button className='bigbluebutton' onClick={handleAddParagon}>Add Paragon</button>
+      <button className="bigbluebutton" onClick={handleAddParagon}>
+        Ajouter un type de Paragon
+      </button>
     </div>
   );
 };
