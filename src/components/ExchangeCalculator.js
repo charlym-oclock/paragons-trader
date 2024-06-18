@@ -70,6 +70,10 @@ const ExchangeCalculator = () => {
 
   const typesTotals = getTypesTotal(Object.values(exchangesById));
 
+  const refresh = () => {
+    window.location.reload();
+  }
+
   return (
     <div className="container">
       <h1>Paragons Calculatosaurus</h1>
@@ -123,6 +127,7 @@ const ExchangeCalculator = () => {
             })}
           </ul>
         </div>
+        <button className='bigbluebutton' onClick={refresh}>Réinitialiser</button>
       </div>
     </div>
   );

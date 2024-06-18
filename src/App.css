@@ -36,6 +36,7 @@ h1 {
   position: fixed;
   bottom: 1px;
   font-size: small;
+  z-index: 2;
 }
 .exchange-group {
   margin-bottom: 30px;
