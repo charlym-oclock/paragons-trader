@@ -15,6 +15,7 @@ const ParagonInput = ({ paragons, handleParagonChange, handleAddParagon, handleR
             />
           </div>
           <input
+            className='quantity-input'
             type="number"
             value={paragon.quantity}
             onChange={(e) => handleParagonChange(index, 'quantity', e.target.value)}

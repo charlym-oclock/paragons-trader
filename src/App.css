@@ -50,6 +50,10 @@ h2 {
   width: 300px; /* Agrandissement de la largeur des sélecteurs */
 }
 
+.paragon-item .quantity-input {
+  max-width: 2rem;
+}
+
 .paragon-item input {
   margin-right: 20px;
   padding: 10px;
@@ -104,12 +108,28 @@ button:hover {
 }
 
 .results-container ul li {
+  display: flex;
+  align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 
 .results-container ul li:last-child {
   border-bottom: none;
+}
+
+.result-item button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.result-item button:hover {
+  background-color: #2980b9;
 }
 
 .error-message {
