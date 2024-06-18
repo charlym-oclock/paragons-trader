@@ -1,23 +1,32 @@
 import React from 'react';
 import Select from 'react-select';
 
-const DesiredParagonInput = ({ desiredParagons, handleDesiredParagonChange, handleAddDesiredParagon, handleRemoveDesiredParagon, options }) => {
+const DesiredParagonInput = ({ desiredParagon, handleDesiredParagonChange, options }) => {
   return (
-    <div>
-      {desiredParagons.map((paragon, index) => (
-        <div key={index} className="paragon-item">
-          <div className="select-container">
-            <Select
-              value={options.find(option => option.value === paragon.type)}
-              onChange={(selectedOption) => handleDesiredParagonChange(index, 'type', selectedOption.value)}
-              options={options}
-              placeholder="Select Desired Paragon"
-            />
-          </div>
-          <button onClick={() => handleRemoveDesiredParagon(index)}>Remove</button>
-        </div>
-      ))}
-      <button onClick={handleAddDesiredParagon}>Add Desired Paragon</button>
+    <div className="select-container">
+      <Select
+          styles={{
+            option: (baseStyles, state) => {
+
+              return {
+                ...baseStyles,
+                backgroundColor: state.isFocused ? 'grey' : 'darkgrey',
+              }
+            }, 
+            control: (baseStyles, state) => {
+
+              console.log('ayo', baseStyles)
+              return ({
+                ...baseStyles,
+                backgroundColor: state.isFocused ? 'grey' : 'darkgrey',
+              })
+            },
+          }}
+        value={options.find(option => option.value === desiredParagon.type)}
+        onChange={(selectedOption) => handleDesiredParagonChange('type', selectedOption.value)}
+        options={options}
+        placeholder="Select Desired Paragon"
+      />
     </div>
   );
 };

@@ -1,27 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #121212;
+  color: #e0e0e0;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
+  max-width: 100%;
 }
 
 .container {
-  background-color: #fff;
+  background-color: #1e1e1e;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   padding: 40px;
-  width: 90%;
-  max-width: 1200px;
-  margin: 20px;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
 }
 
 h2 {
   text-align: center;
-  color: #333;
+  color: #e0e0e0;
+}
+
+.exchange-group {
+  margin-bottom: 30px;
 }
 
 .exchange-container {
@@ -30,36 +42,37 @@ h2 {
   margin-top: 20px;
 }
 
-.paragon-column {
+.paragon-column, .desired-column {
   width: 45%;
 }
 
-.paragon-column h3 {
+.paragon-column h3, .desired-column h3 {
   text-align: center;
-  color: #555;
+  color: #e0e0e0;
 }
 
 .paragon-item {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
 }
 
-.paragon-item .select-container {
+.select-container {
   margin-right: 20px;
-  width: 300px; /* Agrandissement de la largeur des sélecteurs */
+  width: 100%;
 }
 
 .paragon-item .quantity-input {
-  max-width: 2rem;
+  max-width: 4rem;
 }
 
 .paragon-item input {
   margin-right: 20px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
+  background-color: #333;
+  color: #e0e0e0;
   border-radius: 5px;
-  width: 120px; /* Agrandissement de la largeur des champs de saisie */
+  width: 120px;
 }
 
 .paragon-item button {
@@ -75,6 +88,11 @@ h2 {
   background-color: #c0392b;
 }
 
+.desired-result-container {
+  display: flex;
+  align-items: center;
+}
+
 button {
   background-color: #3498db;
   color: white;
@@ -83,7 +101,11 @@ button {
   padding: 10px 20px;
   cursor: pointer;
   display: block;
-  margin: 30px auto;
+  margin: 0 auto;
+}
+
+.bigbluebutton {
+  margin-top: 10px;
 }
 
 button:hover {
@@ -92,14 +114,14 @@ button:hover {
 
 .results-container {
   margin-top: 30px;
-  background-color: #ecf0f1;
+  background-color: #333;
   border-radius: 10px;
   padding: 20px;
 }
 
 .results-container h3 {
   text-align: center;
-  color: #333;
+  color: #e0e0e0;
 }
 
 .results-container ul {
@@ -111,25 +133,15 @@ button:hover {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #555;
 }
 
 .results-container ul li:last-child {
   border-bottom: none;
 }
 
-.result-item button {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-.result-item button:hover {
-  background-color: #2980b9;
+.result-container {
+  margin-left: 20px;
 }
 
 .error-message {

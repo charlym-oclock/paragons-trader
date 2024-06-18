@@ -8,6 +8,19 @@ const ParagonInput = ({ paragons, handleParagonChange, handleAddParagon, handleR
         <div key={index} className="paragon-item">
           <div className="select-container">
             <Select
+              styles={{
+                option: (baseStyles, state) => {
+
+                  return {
+                    ...baseStyles,
+                    backgroundColor: state.isFocused ? 'grey' : 'darkgrey',
+                  }
+                }, 
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  backgroundColor: state.isFocused ? 'grey' : 'darkgrey',
+                }),
+              }}
               value={options.find(option => option.value === paragon.type)}
               onChange={(selectedOption) => handleParagonChange(index, 'type', selectedOption.value)}
               options={options}
@@ -25,7 +38,7 @@ const ParagonInput = ({ paragons, handleParagonChange, handleAddParagon, handleR
           <button onClick={() => handleRemoveParagon(index)}>Remove</button>
         </div>
       ))}
-      <button onClick={handleAddParagon}>Add Paragon</button>
+      <button className='bigbluebutton' onClick={handleAddParagon}>Add Paragon</button>
     </div>
   );
 };

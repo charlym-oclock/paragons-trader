@@ -22,7 +22,7 @@ const ParagonList = ({ paragons, handleParagonChange, handleAddParagon, handleRe
           <button onClick={() => handleRemoveParagon(index)}>Remove</button>
         </div>
       ))}
-      <button onClick={handleAddParagon}>Add Paragon</button>
+      <button className='bigbluebutton' onClick={handleAddParagon}>Add Paragon</button>
     </div>
   );
 };
