@@ -93,7 +93,7 @@ const ExchangeCalculator = () => {
 
       <div className="results-container">
         <div className="total-sent">
-          <h3>Paragons à envoyés</h3>
+          <h3>Paragons à envoyer</h3>
           <ul>
             {Object.entries(typesTotals.traded).map(([type, quantity]) => {
               if (!type) {

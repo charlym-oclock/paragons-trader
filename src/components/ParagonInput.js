@@ -44,7 +44,7 @@ const ParagonInput = ({
             placeholder="Quantity"
             min="0"
           />
-          <button onClick={() => handleRemoveParagon(index)}>Remove</button>
+          <button onClick={() => handleRemoveParagon(index)}>Supprimer</button>
         </div>
       ))}
       <button className="bigbluebutton" onClick={handleAddParagon}>

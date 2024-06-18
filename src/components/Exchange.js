@@ -152,7 +152,7 @@ const Exchange = (props) => {
         />
       </div>
       <div className="desired-column">
-        <h3>Paragon souhaité</h3>
+        <h3>Paragons souhaités</h3>
         <div className="desired-result-container">
           <DesiredParagonInput
             desiredParagon={desiredParagon}
