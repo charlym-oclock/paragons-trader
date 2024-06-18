@@ -1,79 +1,53 @@
-import React, { useState, useEffect } from "react";
-import ParagonInput from "./ParagonInput";
-import DesiredParagonInput from "./DesiredParagonInput";
-import rarity from "../assets/rarity.json";
-import "../App.css";
+import React, { useState, useEffect } from 'react';
+import ParagonInput from './ParagonInput';
+import DesiredParagonInput from './DesiredParagonInput';
+import rarity from '../assets/rarity.json';
+import '../App.css';
 
 export const emptyParagon = {
-  type: "",
-  quantity: 0,
-};
+  type: '',
+  quantity: 0
+}
 
-const paragonOptions = Object.keys(rarity).map((key) => ({
+const paragonOptions = Object.keys(rarity).map(key => ({
   value: key,
-  label: key,
+  label: key
 }));
 
 const exchangeRates = {
-  "10/9": { "10/9": 1, "8/6": 2, "5/3": 4, "2/1": 6, "0.7/0.3": 8, 0.25: 10 },
-  "8/6": { "10/9": 0.5, "8/6": 1, "5/3": 2, "2/1": 4, "0.7/0.3": 6, 0.25: 8 },
-  "5/3": {
-    "10/9": 0.25,
-    "8/6": 0.5,
-    "5/3": 1,
-    "2/1": 2,
-    "0.7/0.3": 4,
-    0.25: 6,
-  },
-  "2/1": {
-    "10/9": 0.167,
-    "8/6": 0.25,
-    "5/3": 0.5,
-    "2/1": 1,
-    "0.7/0.3": 2,
-    0.25: 4,
-  },
-  "0.7/0.3": {
-    "10/9": 0.125,
-    "8/6": 0.167,
-    "5/3": 0.25,
-    "2/1": 0.5,
-    "0.7/0.3": 1,
-    0.25: 2,
-  },
-  0.25: {
-    "10/9": 0.1,
-    "8/6": 0.125,
-    "5/3": 0.167,
-    "2/1": 0.25,
-    "0.7/0.3": 0.5,
-    0.25: 1,
-  },
-};
+    "10/9": { "10/9": 1, "8/6": 2, "5/3": 4, "2/1": 6, "0.7/0.3": 8, "0.25": 10 },
+    "8/6": { "10/9": 0.5, "8/6": 1, "5/3": 2, "2/1": 4, "0.7/0.3": 6, "0.25": 8 },
+    "5/3": { "10/9": 0.25, "8/6": 0.5, "5/3": 1, "2/1": 2, "0.7/0.3": 4, "0.25": 6 },
+    "2/1": { "10/9": 0.167, "8/6": 0.25, "5/3": 0.5, "2/1": 1, "0.7/0.3": 2, "0.25": 4 },
+    "0.7/0.3": { "10/9": 0.125, "8/6": 0.167, "5/3": 0.25, "2/1": 0.5, "0.7/0.3": 1, "0.25": 2 },
+    "0.25": { "10/9": 0.1, "8/6": 0.125, "5/3": 0.167, "2/1": 0.25, "0.7/0.3": 0.5, "0.25": 1 }
+  };
 
 const calculateReceivedQuantity = (paragons, desiredType) => {
   const receivedQuantity = paragons.reduce((receivedQuantity, paragon) => {
-    const paragonRarity = rarity[paragon.type];
-    const desiredRarity = rarity[desiredType];
+      const paragonRarity = rarity[paragon.type];
+      const desiredRarity = rarity[desiredType];
 
-    if (!paragonRarity || !desiredRarity) {
-      return receivedQuantity;
-    }
+      if(!paragonRarity || !desiredRarity) {
+        return receivedQuantity;
+      }
 
-    const exchangeRate = exchangeRates[desiredRarity][paragonRarity];
+      const exchangeRate = exchangeRates[desiredRarity][paragonRarity];
 
-    return (receivedQuantity += paragon.quantity * exchangeRate);
+      return receivedQuantity += paragon.quantity * exchangeRate;
   }, 0);
 
   return receivedQuantity % 1 // Nombre à virgule ?
-    ? receivedQuantity.toFixed(1)
-    : receivedQuantity;
-};
+          ? receivedQuantity.toFixed(1) 
+          : receivedQuantity;
+}
 
-const Exchange = (props) => {
-  const [tradedParagons, setTradedParagons] = useState([emptyParagon]);
+const Exchange = props => {
+  const [tradedParagons, setTradedParagons] = useState([
+      emptyParagon
+  ]);
 
-  const [desiredParagon, setDesiredParagon] = useState(emptyParagon);
+  const [desiredParagon, setDesiredParagon] = useState(emptyParagon)
 
   // Met à jour la quantité reçue lors d'un changement dans le form
   useEffect(() => {
@@ -99,77 +73,79 @@ const Exchange = (props) => {
     setDesiredParagon(newDesiredParagon);
   }, [tradedParagons, desiredParagon.type]);
 
+
+
   const addTrade = () => {
-    const newTrades = [...tradedParagons];
+      const newTrades = [...tradedParagons]
 
-    newTrades.push(emptyParagon);
+      newTrades.push(emptyParagon)
 
-    setTradedParagons(newTrades);
-  };
+      setTradedParagons(newTrades)
+  }
 
-  const removeTrade = (index) => {
-    if (tradedParagons.length === 1) {
-      setTradedParagons([emptyParagon]);
+  const removeTrade = index => {
+      if(tradedParagons.length === 1) {
+        setTradedParagons([emptyParagon]);
 
-      return;
-    }
+        return;
+      }
 
-    const newTrades = tradedParagons.filter((_, i) => i !== index);
+      const newTrades = tradedParagons.filter((_, i) => i !== index);
 
-    setTradedParagons(newTrades);
-  };
+      setTradedParagons(newTrades);
+  }
 
   const updateTrade = (tradeIndex, field, value) => {
-    const newTrades = [...tradedParagons];
-    const trade = newTrades[tradeIndex];
+      const newTrades = [...tradedParagons];
+      const trade = newTrades[tradeIndex];
 
-    newTrades[tradeIndex] = {
-      ...trade,
-      [field]: value,
-    };
+      newTrades[tradeIndex] = {
+          ...trade,
+          [field]: value
+      }
 
-    setTradedParagons(newTrades);
-  };
+      setTradedParagons(newTrades)
+  }
 
-  const setDesiredType = (type) => {
-    const newReceived = { ...desiredParagon };
+  const setDesiredType = type => {
+      const newReceived = {...desiredParagon}
 
-    newReceived.type = type;
+      newReceived.type = type
 
-    setDesiredParagon(newReceived);
-  };
+      setDesiredParagon(newReceived)
+  }
 
   return (
-    <div className="exchange-container">
-      <div className="paragon-column">
-        <h3>Paragons à échanger</h3>
-        <ParagonInput
-          paragons={tradedParagons}
-          handleParagonChange={updateTrade}
-          handleAddParagon={addTrade}
-          handleRemoveParagon={removeTrade}
-          options={paragonOptions}
-        />
-      </div>
-      <div className="desired-column">
-        <h3>Paragons souhaités</h3>
-        <div className="desired-result-container">
-          <DesiredParagonInput
-            desiredParagon={desiredParagon}
-            handleDesiredParagonChange={(field, value) => {
-              if (field === "type") {
-                setDesiredType(value);
-              }
-            }}
-            options={paragonOptions}
-          />
-          <div className="result-container">
-            <h4>{desiredParagon.quantity}</h4>
+      <div className="exchange-container">
+          <div className="paragon-column">
+              <h3>Paragons à échanger</h3>
+              <ParagonInput
+                  paragons={tradedParagons}
+                  handleParagonChange={updateTrade}
+                  handleAddParagon={addTrade}
+                  handleRemoveParagon={removeTrade}
+                  options={paragonOptions}
+              />
           </div>
-        </div>
+          <div className="desired-column">
+              <h3>Paragons souhaités</h3>
+              <div className="desired-result-container">
+                  <DesiredParagonInput
+                      desiredParagon={desiredParagon}
+                      handleDesiredParagonChange={(field, value) => {
+                        if(field === 'type') {
+                          setDesiredType(value)
+                        }
+                      }}
+                      options={paragonOptions}
+                  />
+                  <div className="result-container">
+                      <h4>{desiredParagon.quantity}</h4>
+                  </div>
+              </div>
+          </div>
       </div>
-    </div>
-  );
-};
+  )
+}
 
 export default Exchange;

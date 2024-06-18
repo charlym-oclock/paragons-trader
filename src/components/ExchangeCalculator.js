@@ -73,6 +73,7 @@ const ExchangeCalculator = () => {
   return (
     <div className="container">
       <h1>Paragons Calculatosaurus</h1>
+      <span className="thanks">®By Luinil & Bubu @1nGames, special mucho thanks : Knfcz avec un X</span>
 
       {Object.keys(exchangesById).map((id) => (
         <React.Fragment key={id}>

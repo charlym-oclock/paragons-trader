@@ -31,6 +31,12 @@ h1 {
   color: #e0e0e0;
 }
 
+.thanks {
+  text-align: left;
+  position: fixed;
+  bottom: 1px;
+  font-size: small;
+}
 .exchange-group {
   margin-bottom: 30px;
 }
