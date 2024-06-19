@@ -31,6 +31,26 @@ h1 {
   color: #e0e0e0;
 }
 
+.logo {
+  display: block;
+  margin: 0 auto;
+  max-width: 250px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.link {
+  color: #3498db;
+  text-decoration: underline;
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 2em;
+}
+
 .thanks {
   text-align: left;
   position: fixed;
