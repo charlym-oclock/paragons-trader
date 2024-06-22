@@ -132,6 +132,7 @@ button {
 
 .bigbluebutton {
   margin-top: 10px;
+  max-height: 3rem;
 }
 
 button:hover {
@@ -143,6 +144,8 @@ button:hover {
   background-color: #333;
   border-radius: 10px;
   padding: 20px;
+  max-height: 35vh;
+  overflow: auto;
 }
 
 .results-container h3 {
