@@ -76,9 +76,10 @@ const ExchangeCalculator = () => {
 
   return (
     <div className="container">
-      <h1>Paragons Calculatosaurus</h1>
+      <h1 className="fuck">🖕</h1>
+      {/* <h1>Paragons Calculatosaurus</h1> */}
       <img className="logo" src="/logo_top_serveur_ark.png" alt="Paragons" />
-      <a target="_blank" className="link" href="https://1ngames.fr/accueil.php">Rejoindre 1nGames</a>
+      {/* <a target="_blank" className="link" href="https://1ngames.fr/accueil.php">Rejoindre 1nGames</a>
       <span className="thanks">®By Luinil & Bubu @1nGames, special mucho thanks : Knfcz avec un X</span>
 
       {Object.keys(exchangesById).map((id) => (
@@ -130,7 +131,7 @@ const ExchangeCalculator = () => {
           </ul>
         </div>
         <button className='bigbluebutton' onClick={refresh}>Réinitialiser</button>
-      </div>
+      </div> */}
     </div>
   );
 };
